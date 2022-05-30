@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Accordion from "./Accordion";
+import Dropdown from "./Dropdown";
 import Search from "./Search";
+import Translate from "./Translate";
 
 
 const items = [
@@ -18,11 +20,46 @@ const items = [
     }
 ]
 
+const options = [
+    {
+        title: 'The color Red',
+        val: 'red'
+    },
+    {
+        title: 'The color Blue',
+        val: 'blue'
+    },
+    {
+        title: 'A shade of yellow',
+        val: 'yellow'
+    }
+]
+
+
+
+
 export default () => {
+
+    const[selected, setSelected] = useState(options[0])
+    const[showDropdown, setShowDropDown] = useState(true)
+
     return(
         <div>
             {/* <Accordion items={items} /> */}
-            <Search/>
+            {/* <Search/> */}
+
+            {/* <button onClick={()=> setShowDropDown(!showDropdown)}>ToggleDropDown</button>
+            {showDropdown ?
+                <Dropdown 
+                    label= "Select a color" 
+                    selected={selected} 
+                    setSelected={setSelected}
+                    options={options}
+                />
+                : null
+            } */}
+
+            <Translate />
         </div>
     )
 }

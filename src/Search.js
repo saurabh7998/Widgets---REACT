@@ -10,6 +10,14 @@ const Search = () => {
     const renderedResults = results.map((result)=> {
         return (
             <div key={result.pageid} className="item">
+                <div className="right floated content">
+                    <a 
+                    className="ui button"
+                    href={`https://en.wikipedia.org/?curid=${result.pageid}`}>
+                        Go
+                    </a>
+
+                </div>
                 <div className="content">
                     <div className="header">
                             {result.title}
@@ -36,9 +44,22 @@ const Search = () => {
             })
             setResults(data.query.search)
         }
-        if(searchTerm.length > 0){
-            search()
-        }
+
+        //Only invokes search when there is no input change for 700ms (optimization)
+        const timeoutID = setTimeout(() => {
+            if(searchTerm.length > 0){
+                search()
+            }
+        }, 700)
+
+        //This is a Cleanup function. (Read about useEffect cleanup function).
+        //It is called on the next render to clear the previous timeout. 
+        return(
+            () => {
+                clearTimeout(timeoutID)
+            }
+        )
+       
     }, [searchTerm])
 
     return (
