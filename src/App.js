@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Accordion from "./Accordion";
 import Dropdown from "./Dropdown";
+import Header from "./Header";
+import Route from "./Route";
 import Search from "./Search";
 import Translate from "./Translate";
 
@@ -59,7 +61,29 @@ export default () => {
                 : null
             } */}
 
-            <Translate />
+            {/* <Translate /> */}
+
+            <Header/>
+            <Route path='/'>
+                <Accordion items={items} />
+            </Route>
+
+            <Route path='/search'>
+                <Search/>
+            </Route>
+
+            <Route path='/dropdown'>
+                <Dropdown 
+                    label= "Select a color" 
+                    selected={selected} 
+                    setSelected={setSelected}
+                    options={options}
+                />
+            </Route>
+
+            <Route path='/translate'>
+                <Translate />
+            </Route>
         </div>
     )
 }
